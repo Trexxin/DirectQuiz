@@ -7,15 +7,15 @@ import { QuizApiResponse, QuizQuestion } from '../models';
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.css']
 })
-export class QuizComponent implements OnInit {
+export class QuizComponent {
   quizQuestions: QuizQuestion[] = [];
 
   constructor(private dataService: DataService) { }
 
-  ngOnInit(): void {
-    this.dataService.getQuizQuestions().subscribe((response: QuizApiResponse) => {
-      this.quizQuestions = response.results;
-      console.log(response);
-    });
+  generateQuiz(category: string): void {
+    this.dataService.getQuizQuestions(category).subscribe((quizData) => {
+      console.log(quizData);
+    })
   }
+
 }

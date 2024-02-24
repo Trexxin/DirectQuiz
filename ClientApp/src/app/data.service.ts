@@ -13,8 +13,13 @@ export class DataService {
 
   private apiUrl = 'https://opentdb.com/api.php?amount=10'
 
-  getQuizQuestions(): Observable<QuizApiResponse> {
-    return this.http.get<QuizApiResponse>(this.apiUrl).pipe(
+  /**
+ * Retrieves quiz questions from the opentdb API based on the specified category.
+ * @param category The category for which quiz questions should be fetched.
+ */
+  getQuizQuestions(category: string): Observable<QuizApiResponse> {
+    const url = `${this.apiUrl}&category=${category}`;
+    return this.http.get<QuizApiResponse>(url).pipe(
       map(response => {
         // Iterate through each quiz question and decode HTML entities
         response.results.forEach(question => {
