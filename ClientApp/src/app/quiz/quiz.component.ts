@@ -9,17 +9,9 @@ import { QuizApiResponse, QuizQuestion } from '../models';
   styleUrls: ['./quiz.component.css']
 })
 export class QuizComponent {
-  constructor(private dataService: DataService, private router: Router) { }
+  constructor(private router: Router) { }
 
   selectCategory(category: string): void {
     this.router.navigate([`quiz-settings`, category])
   }
-  
-  generateQuiz(category: string): void {
-    this.dataService.getQuizQuestions(category).subscribe((quizData) => {
-      console.log(quizData);
-    })
-  }
-  
-
 }

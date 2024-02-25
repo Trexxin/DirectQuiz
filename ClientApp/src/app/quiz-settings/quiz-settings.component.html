@@ -1,1 +1,34 @@
-<p>quiz-settings works!</p>
+<h1 class="my-5">Please choose additional settings for your quiz!</h1>
+<form>
+  <div class="mb-3">
+    <label for="numberOfQuestions" class="form-label">How many questions? (Can only go up to 50!)</label>
+    <input type="number" class="form-control" id="numberOfQuestions" aria-describedby="numberOfQuestions"
+           min="1" max="50" [(ngModel)]="numberOfQuestions" name="numberOfQuestions" (ngModelChange)="validateInput()" inputmode="numeric">
+    <div *ngIf="invalidInput" class="alert">
+      <div *ngIf="numberOfQuestions > 50">
+        Error: Number of questions cannot be more than 50.
+      </div>
+      <div *ngIf="numberOfQuestions < 1">
+        Error: Number of questions must be at least 1.
+      </div>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="inputState">What difficulty?</label>
+    <select id="inputState" [(ngModel)]="quizDifficulty" name="quizDifficulty" class="form-control">
+      <option value="">Any Difficulty</option>
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="inputState">What type?</label>
+    <select id="inputState" [(ngModel)]="quizType" name="quizType" class="form-control">
+      <option selected value="">Any Type</option>
+      <option value="multiple">Multiple Choice</option>
+      <option value="boolean">True / False</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="generateQuiz()">Play</button>
+</form>
