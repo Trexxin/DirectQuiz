@@ -1,8 +1,8 @@
 <p>play-quiz works!</p>
 <div *ngIf="quizData">
-  <p>testing :D</p>
   <div *ngFor="let question of quizData.results">
     <!-- Display individual quiz results -->
+    <app-quiz-question [quizData]="quizData"></app-quiz-question>
     <h3>{{question.question}}</h3>
   </div>
 </div>

@@ -11,6 +11,7 @@ import { QuizComponent } from './quiz/quiz.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { QuizSettingsComponent } from './quiz-settings/quiz-settings.component';
 import { PlayQuizComponent } from './play-quiz/play-quiz.component';
+import { QuizQuestionComponent } from './play-quiz/quiz-question/quiz-question.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PlayQuizComponent } from './play-quiz/play-quiz.component';
     QuizComponent,
     LeaderboardComponent,
     QuizSettingsComponent,
-    PlayQuizComponent
+    PlayQuizComponent,
+    QuizQuestionComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
