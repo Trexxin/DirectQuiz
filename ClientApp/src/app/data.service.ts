@@ -11,6 +11,7 @@ export class DataService {
 
   constructor(private http: HttpClient, private sanitzer: DomSanitizer) { }
 
+  quizData: any;
 
   /**
  * Retrieves quiz questions from the opentdb API based on the specified category.
@@ -31,7 +32,7 @@ export class DataService {
       apiUrl += '&type=' + quizType;
     }
 
-    return this.http.get<QuizApiResponse>(apiUrl).pipe(
+    this.quizData = this.http.get<QuizApiResponse>(apiUrl).pipe(
       map(response => {
         // Iterate through each quiz question and decode HTML entities
         response.results.forEach(question => {
@@ -42,6 +43,7 @@ export class DataService {
         return response;
       })
     );
+    return this.quizData;
   }
 
   /**
