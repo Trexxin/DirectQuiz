@@ -1,4 +1,4 @@
-<h2 class="text-center mt-5 text-primary">Good Luck!</h2>
+<h2 class="text-center mt-5">Good Luck!</h2>
 <p class="font-weight-light text-center text-info">Note. Only one click allowed per question. Choose wisely!</p>
 <div *ngIf="quizData">
   <div *ngFor="let currentQuestion of quizData.results">
@@ -10,6 +10,9 @@
                        (answerSelected)="handleAnswerSelected($event)">
     </app-quiz-question>
   </div>
-  <button class="btn btn-primary btn-lg mb-5" [disabled]="totalAnswers == (numberCorrect + numberIncorrect)" (click)="showResults()">Finished</button>
+  <button class="btn btn-primary btn-lg mb-5"
+          [disabled]="totalAnswers == (numberCorrect + numberIncorrect)"
+          (click)="showResults()"
+          >Finish</button>
 </div>
 

@@ -49,6 +49,6 @@ export class PlayQuizComponent implements OnInit {
   }
 
   showResults(): void {
-    this.router.navigate([`quiz/results`]);
+    this.router.navigate([`quiz/results`], { queryParams: { numberCorrect: this.numberCorrect, numberIncorrect: this.numberIncorrect }});
   }
 }
