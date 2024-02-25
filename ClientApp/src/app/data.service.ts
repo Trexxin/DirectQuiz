@@ -11,15 +11,27 @@ export class DataService {
 
   constructor(private http: HttpClient, private sanitzer: DomSanitizer) { }
 
-  private apiUrl = 'https://opentdb.com/api.php?amount=10'
 
   /**
  * Retrieves quiz questions from the opentdb API based on the specified category.
  * @param category The category for which quiz questions should be fetched.
  */
-  getQuizQuestions(category: string): Observable<QuizApiResponse> {
-    const url = `${this.apiUrl}&category=${category}`;
-    return this.http.get<QuizApiResponse>(url).pipe(
+  getQuizQuestions(numberOfQuestions: number, selectedCategory: string, quizDifficulty: string, quizType: string): Observable<QuizApiResponse> {
+    let apiUrl = 'https://opentdb.com/api.php?' + 'amount=' + numberOfQuestions;
+
+    if (selectedCategory !== "") {
+      apiUrl += '&category=' + selectedCategory;
+    }
+
+    if (quizDifficulty !== "") {
+      apiUrl += '&difficulty=' + quizDifficulty;
+    }
+
+    if (quizType !== "") {
+      apiUrl += '&type=' + quizType;
+    }
+
+    return this.http.get<QuizApiResponse>(apiUrl).pipe(
       map(response => {
         // Iterate through each quiz question and decode HTML entities
         response.results.forEach(question => {
