@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../data.service';
 
 @Component({
@@ -9,10 +9,11 @@ import { DataService } from '../data.service';
 })
 export class PlayQuizComponent implements OnInit {
   quizData: any;
+  totalAnswers: number = 0;
   numberCorrect: number =  0;
   numberIncorrect: number = 0;
 
-  constructor(private dataService: DataService, private route: ActivatedRoute) { }
+  constructor(private dataService: DataService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     const storedQuizData = sessionStorage.getItem('quizData');
@@ -25,6 +26,7 @@ export class PlayQuizComponent implements OnInit {
         const quizDifficulty = params['quizDifficulty'];
         const quizType = params['quizType'];
         this.generateQuizApi(numberOfQuestions, selectedCategory, quizDifficulty, quizType);
+        this.totalAnswers = numberOfQuestions;
       });
     }
   }
@@ -44,5 +46,9 @@ export class PlayQuizComponent implements OnInit {
     } else {
       this.numberIncorrect++;
     };
+  }
+
+  showResults(): void {
+    this.router.navigate([`quiz/results`]);
   }
 }

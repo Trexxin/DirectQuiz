@@ -10,5 +10,6 @@
                        (answerSelected)="handleAnswerSelected($event)">
     </app-quiz-question>
   </div>
+  <button class="btn btn-primary btn-lg mb-5" [disabled]="totalAnswers == (numberCorrect + numberIncorrect)" (click)="showResults()">Finished</button>
 </div>
 

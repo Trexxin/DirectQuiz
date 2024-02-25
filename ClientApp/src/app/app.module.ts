@@ -12,6 +12,7 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { QuizSettingsComponent } from './quiz-settings/quiz-settings.component';
 import { PlayQuizComponent } from './play-quiz/play-quiz.component';
 import { QuizQuestionComponent } from './play-quiz/quiz-question/quiz-question.component';
+import { ResultsComponent } from './results/results.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { QuizQuestionComponent } from './play-quiz/quiz-question/quiz-question.c
     LeaderboardComponent,
     QuizSettingsComponent,
     PlayQuizComponent,
-    QuizQuestionComponent
+    QuizQuestionComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -33,6 +35,7 @@ import { QuizQuestionComponent } from './play-quiz/quiz-question/quiz-question.c
       { path: 'quiz', component: QuizComponent },
       { path: 'quiz-settings/:category', component: QuizSettingsComponent },
       { path: 'quiz/play', component: PlayQuizComponent },
+      { path: 'quiz/results', component: ResultsComponent },
       { path: 'leaderboard', component: LeaderboardComponent },
     ])
   ],
