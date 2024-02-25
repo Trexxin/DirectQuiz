@@ -12,6 +12,7 @@ export class PlayQuizComponent implements OnInit {
   totalAnswers: number = 0;
   numberCorrect: number =  0;
   numberIncorrect: number = 0;
+  isValid: boolean = true;
 
   constructor(private dataService: DataService, private route: ActivatedRoute, private router: Router) { }
 
@@ -20,14 +21,15 @@ export class PlayQuizComponent implements OnInit {
     const storedTotalAnswers = sessionStorage.getItem('totalAnswers');
     if (storedQuizData && storedTotalAnswers!== null) {
       this.quizData = JSON.parse(storedQuizData);
-      this.totalAnswers = JSON.parse(storedTotalAnswers);
+      this.totalAnswers = parseInt(storedTotalAnswers);
+      this.validateQuiz();
     } else {
       this.route.queryParams.subscribe(params => {
         const selectedCategory = params['category'];
         const numberOfQuestions = params['numberOfQuestions'];
         const quizDifficulty = params['quizDifficulty'];
         const quizType = params['quizType'];
-        this.totalAnswers = numberOfQuestions;
+        this.totalAnswers = parseInt(numberOfQuestions);
         sessionStorage.setItem('totalAnswers', JSON.stringify(this.totalAnswers));
         this.generateQuizApi(numberOfQuestions, selectedCategory, quizDifficulty, quizType);
       });
@@ -39,19 +41,23 @@ export class PlayQuizComponent implements OnInit {
       .subscribe((quizData: any) => {
         sessionStorage.setItem('quizData', JSON.stringify(quizData));
         this.quizData = quizData;
-        console.log(this.quizData);
+        this.validateQuiz();
       });
   }
 
   handleAnswerSelected(answer: boolean): void {
     if (answer) {
       this.numberCorrect++;
-      console.log("Correct" + this.numberCorrect);
     } else {
       this.numberIncorrect++;
-      console.log("Incorrect" + this.numberIncorrect);
-      console.log(this.totalAnswers);
     };
+    this.validateQuiz();
+  }
+
+  validateQuiz(): boolean {
+    this.isValid = (this.numberCorrect + this.numberIncorrect) === this.totalAnswers;
+    return this.isValid;
+  
   }
 
   showResults(): void {
