@@ -1,9 +1,14 @@
-<p>play-quiz works!</p>
+<h2 class="text-center mt-5 text-primary">Good Luck!</h2>
+<p class="font-weight-light text-center text-info">Note. Only one click allowed per question. Choose wisely!</p>
 <div *ngIf="quizData">
-  <div *ngFor="let question of quizData.results">
+  <div *ngFor="let currentQuestion of quizData.results">
     <!-- Display individual quiz results -->
-    <app-quiz-question [quizData]="quizData"></app-quiz-question>
-    <h3>{{question.question}}</h3>
+    <app-quiz-question [question]="currentQuestion.question"
+                       [correct_answer]="currentQuestion.correct_answer"
+                       [incorrect_answers]="currentQuestion.incorrect_answers"
+                       [type]="currentQuestion.type"
+                       (answerSelected)="handleAnswerSelected($event)">
+    </app-quiz-question>
   </div>
 </div>
 

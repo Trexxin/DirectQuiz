@@ -1,2 +1,12 @@
-<p>quiz-question works!</p>
-{{quizData.question}}
+<div class="my-4">
+  <h3>{{question}}</h3>
+  <div class="answer-options">
+    <button *ngFor="let answer of shuffledAnswers"
+            class="btn btn-outline-secondary btn-lg ms-2 my-2"
+            [class.selected]="selectedAnswer === answer"
+            [disabled]="selectedAnswer !== null"
+            (click)="onSelectAnswer(answer)">
+      {{answer}}
+    </button>
+  </div>
+</div>

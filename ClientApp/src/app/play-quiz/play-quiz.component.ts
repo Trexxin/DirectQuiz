@@ -9,6 +9,9 @@ import { DataService } from '../data.service';
 })
 export class PlayQuizComponent implements OnInit {
   quizData: any;
+  numberCorrect: number =  0;
+  numberIncorrect: number = 0;
+
   constructor(private dataService: DataService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -33,5 +36,13 @@ export class PlayQuizComponent implements OnInit {
         this.quizData = quizData;
         console.log(this.quizData);
       });
+  }
+
+  handleAnswerSelected(answer: boolean): void {
+    if (answer) {
+      this.numberCorrect++;
+    } else {
+      this.numberIncorrect++;
+    };
   }
 }
