@@ -17,16 +17,19 @@ export class PlayQuizComponent implements OnInit {
 
   ngOnInit(): void {
     const storedQuizData = sessionStorage.getItem('quizData');
-    if (storedQuizData) {
+    const storedTotalAnswers = sessionStorage.getItem('totalAnswers');
+    if (storedQuizData && storedTotalAnswers!== null) {
       this.quizData = JSON.parse(storedQuizData);
+      this.totalAnswers = JSON.parse(storedTotalAnswers);
     } else {
       this.route.queryParams.subscribe(params => {
         const selectedCategory = params['category'];
         const numberOfQuestions = params['numberOfQuestions'];
         const quizDifficulty = params['quizDifficulty'];
         const quizType = params['quizType'];
-        this.generateQuizApi(numberOfQuestions, selectedCategory, quizDifficulty, quizType);
         this.totalAnswers = numberOfQuestions;
+        sessionStorage.setItem('totalAnswers', JSON.stringify(this.totalAnswers));
+        this.generateQuizApi(numberOfQuestions, selectedCategory, quizDifficulty, quizType);
       });
     }
   }
@@ -43,8 +46,11 @@ export class PlayQuizComponent implements OnInit {
   handleAnswerSelected(answer: boolean): void {
     if (answer) {
       this.numberCorrect++;
+      console.log("Correct" + this.numberCorrect);
     } else {
       this.numberIncorrect++;
+      console.log("Incorrect" + this.numberIncorrect);
+      console.log(this.totalAnswers);
     };
   }
 
