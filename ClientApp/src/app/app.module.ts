@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { QuizComponent } from './quiz/quiz.component';
-import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { QuizSettingsComponent } from './quiz-settings/quiz-settings.component';
 import { PlayQuizComponent } from './play-quiz/play-quiz.component';
 import { QuizQuestionComponent } from './play-quiz/quiz-question/quiz-question.component';
@@ -20,7 +19,6 @@ import { ResultsComponent } from './results/results.component';
     NavMenuComponent,
     HomeComponent,
     QuizComponent,
-    LeaderboardComponent,
     QuizSettingsComponent,
     PlayQuizComponent,
     QuizQuestionComponent,
@@ -35,8 +33,7 @@ import { ResultsComponent } from './results/results.component';
       { path: 'quiz', component: QuizComponent },
       { path: 'quiz-settings/:category', component: QuizSettingsComponent },
       { path: 'quiz/play', component: PlayQuizComponent },
-      { path: 'quiz/results', component: ResultsComponent },
-      { path: 'leaderboard', component: LeaderboardComponent },
+      { path: 'quiz/results', component: ResultsComponent }
     ])
   ],
   providers: [],
