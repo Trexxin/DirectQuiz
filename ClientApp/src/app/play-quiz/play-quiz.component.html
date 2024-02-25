@@ -2,7 +2,7 @@
 <p class="font-weight-light text-center text-info">Note. Only one click allowed per question. Choose wisely!</p>
 <div *ngIf="quizData">
   <div *ngFor="let currentQuestion of quizData.results">
-    <!-- Display individual quiz results -->
+    <!-- Display individual quiz questions and answers -->
     <app-quiz-question [question]="currentQuestion.question"
                        [correct_answer]="currentQuestion.correct_answer"
                        [incorrect_answers]="currentQuestion.incorrect_answers"
@@ -11,7 +11,7 @@
     </app-quiz-question>
   </div>
   <button class="btn btn-primary btn-lg mb-5"
-          [disabled]="totalAnswers == (numberCorrect + numberIncorrect)"
+          [disabled]="!isValid"
           (click)="showResults()"
           >Finish</button>
 </div>

@@ -1,4 +1,7 @@
- export interface QuizQuestion {
+/**
+ * Interface that represents a single quiz question.
+ */
+export interface QuizQuestion {
    type: string;
    difficulty: string;
    category: string;
@@ -7,6 +10,9 @@
    incorrect_answers: string[];
  }
 
+/**
+ * Interface that represents the response from the quiz API.
+ */
  export interface QuizApiResponse {
    response_code: number;
    results: QuizQuestion[]

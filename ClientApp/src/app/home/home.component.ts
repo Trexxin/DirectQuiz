@@ -1,3 +1,6 @@
+/**
+ * Component that introduces the user to the app.
+ */
 import { Component } from '@angular/core';
 
 @Component({

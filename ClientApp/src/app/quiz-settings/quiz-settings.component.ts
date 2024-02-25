@@ -1,3 +1,7 @@
+/**
+ * Component for choosing quiz settings.
+ * Allows users to select the category, number of questions, difficulty, and type of quiz.
+ */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../data.service';
@@ -16,22 +20,28 @@ export class QuizSettingsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private dataService: DataService, private router: Router) { }
 
+  /**
+   * Gets the selected category from the route parameters.
+   */
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.selectedCategory = params[`category`];
     })
   }
 
+  /**
+   * Validates the input for the number of questions.
+   * Invalid if the input is out of range.
+   */
   validateInput() {
     this.invalidInput = (this.numberOfQuestions < 1 || this.numberOfQuestions > 50);
   }
 
-  generateQuizApi(numberOfQuestions: number, selectedCategory: string, quizDifficulty: string, quizType: string): void {
-    this.dataService.getQuizQuestions(numberOfQuestions, selectedCategory, quizDifficulty, quizType);
-  }
-
+  /**
+   * Passes the speciified quiz settings to the quiz/play page.
+   * Clears sessionStorage to make sure a new quiz is generated.
+   */
   generateQuiz(): void {
-    this.generateQuizApi(this.numberOfQuestions, this.selectedCategory, this.quizDifficulty, this.quizType)
     this.router.navigate([`quiz/play`], {
       queryParams: {
         category: this.selectedCategory,

@@ -14,9 +14,9 @@ export class DataService {
   quizData: any;
 
   /**
- * Retrieves quiz questions from the opentdb API based on the specified category.
- * @param category The category for which quiz questions should be fetched.
- */
+   * Retrieves quiz questions from the opentdb API based on the specified category.
+   * @param category The category for which quiz questions should be fetched.
+   */
   getQuizQuestions(numberOfQuestions: number, selectedCategory: string, quizDifficulty: string, quizType: string): Observable<QuizApiResponse> {
     let apiUrl = 'https://opentdb.com/api.php?' + 'amount=' + numberOfQuestions;
 
@@ -47,10 +47,10 @@ export class DataService {
   }
 
   /**
- * Decodes HTML entities from the text returned from the API.
- * @param text The text containing HTML entities to decode.
- * @returns The decoded text.
- */
+   * Decodes HTML entities from the text returned from the API.
+   * @param text The text containing HTML entities to decode.
+   * @returns The decoded text.
+   */
   private decodeHtmlEntities(text: string): string {
     const element = document.createElement('div');
     element.innerHTML = text;

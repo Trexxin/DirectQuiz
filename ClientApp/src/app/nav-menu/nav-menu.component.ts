@@ -1,3 +1,6 @@
+/**
+ * Component for app navbar.
+ */
 import { Component } from '@angular/core';
 
 @Component({

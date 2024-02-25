@@ -1,3 +1,7 @@
+/**
+ * Component for playing the quiz.
+ * Displays quiz questions and lets users select pick answers.
+ */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../data.service';
@@ -16,6 +20,9 @@ export class PlayQuizComponent implements OnInit {
 
   constructor(private dataService: DataService, private route: ActivatedRoute, private router: Router) { }
 
+  /**
+   * Retrieves quiz data from sessionStorage if it exists, otherwise generates a new quiz.
+   */
   ngOnInit(): void {
     const storedQuizData = sessionStorage.getItem('quizData');
     const storedTotalAnswers = sessionStorage.getItem('totalAnswers');
@@ -36,6 +43,14 @@ export class PlayQuizComponent implements OnInit {
     }
   }
 
+  /**
+   * Calls the dataservice to generate a quiz with the specified parameters.
+   * Stores the quiz in sessionStorage.
+   * @param numberOfQuestions Number of questions in the quiz
+   * @param selectedCategory selected category for the quiz
+   * @param quizDifficulty difficulty level of the quiz
+   * @param quizType type of quiz
+   */
   generateQuizApi(numberOfQuestions: number, selectedCategory: string, quizDifficulty: string, quizType: string): void {
     this.dataService.getQuizQuestions(numberOfQuestions, selectedCategory, quizDifficulty, quizType)
       .subscribe((quizData: any) => {
@@ -45,6 +60,10 @@ export class PlayQuizComponent implements OnInit {
       });
   }
 
+  /**
+   * Handles the user's answers and makes sure the quiz is completed
+   * @param answer indicates whether the selected answer is correct
+   */
   handleAnswerSelected(answer: boolean): void {
     if (answer) {
       this.numberCorrect++;
@@ -54,12 +73,18 @@ export class PlayQuizComponent implements OnInit {
     this.validateQuiz();
   }
 
+  /**
+   * Validates the quiz by checking if the total number of answers matches the expected total.
+   */
   validateQuiz(): boolean {
     this.isValid = (this.numberCorrect + this.numberIncorrect) === this.totalAnswers;
     return this.isValid;
   
   }
 
+  /**
+   * Navigates to the results page and passes in the number of correct and incorrect answers.
+   */
   showResults(): void {
     this.router.navigate([`quiz/results`], { queryParams: { numberCorrect: this.numberCorrect, numberIncorrect: this.numberIncorrect }});
   }
