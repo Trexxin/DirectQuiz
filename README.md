@@ -1,4 +1,9 @@
 # DirectQuiz
+
+
+https://github.com/Trexxin/DirectQuiz/assets/52933202/ac145362-b80c-4fb0-ae2c-7e3aec695ecc
+
+
 This web app was created to allow users to take a quiz on a topic of their choice. 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.2.
